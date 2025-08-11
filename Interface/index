@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Produtos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-4xl mx-auto bg-white p-6 rounded shadow">
+        <h1 class="text-2xl font-bold mb-4">Produtos</h1>
+
+        @if(session('success'))
+            <div class="bg-green-200 text-green-800 p-3 mb-4 rounded">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <a href="{{ route('produtos.create') }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">Novo Produto</a>
+
+        <table class="table-auto w-full mt-4 border-collapse border border-gray-300">
+            <thead>
+                <tr class="bg-gray-200">
+                    <th class="border border-gray-300 px-4 py-2">Nome</th>
+                    <th class="border border-gray-300 px-4 py-2">Preço</th>
+                    <th class="border border-gray-300 px-4 py-2">Descrição</th>
+                    <th class="border border-gray-300 px-4 py-2">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse($produtos as $produto)
+                <tr>
+                    <td class="border border-gray-300 px-4 py-2">{{ $produto->nome }}</td>
+                    <td class="border border-gray-300 px-4 py-2">R$ {{ number_format($produto->preco, 2, ',', '.') }}</td>
+                    <td class="border border-gray-300 px-4 py-2">{{ $produto->descricao }}</td>
+                    <td class="border border-gray-300 px-4 py-2">
+                        <a href="{{ route('produtos.edit', $produto) }}" class="text-blue-600 hover:underline mr-2">Editar</a>
+                        <form action="{{ route('produtos.destroy', $produto) }}" method="POST" class="inline" onsubmit="return confirm('Deletar esse produto?')">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="text-red-600 hover:underline">Excluir</button>
+                        </form>
+                    </td>
+                </tr>
+                @empty
+                <tr>
+                    <td colspan="4" class="text-center p-4">Nenhum produto cadastrado.</td>
+                </tr>
+                @endforelse
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
