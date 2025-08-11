@@ -75,14 +75,7 @@ php artisan migrate
 
 
 _____________________
-6. (Opcional) Instalar dependências frontend e compilar assets
 
-Caso deseje personalizar o CSS ou usar Tailwind/Bootstrap via npm:
-
-bash
-
-npm install
-npm run dev
 
 
 _____________________
