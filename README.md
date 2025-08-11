@@ -28,7 +28,7 @@ Aplicação Laravel simples para gerenciar produtos com as operações de criar,
 ### 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/seu-usuario/seu-repositorio.git
+git clone https://github.com/lazarosena/crud-produtos
 cd seu-repositorio
 
 _____________________
